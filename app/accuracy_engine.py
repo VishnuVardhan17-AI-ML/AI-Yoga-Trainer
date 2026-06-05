@@ -3,15 +3,15 @@ def calculate_tree_accuracy(
     right_knee_angle
 ):
 
-    score = 0
+    score = 100
 
     if left_knee_angle > 160:
-        score += 50
+        score -= abs(left_knee_angle - 180)
 
-    if right_knee_angle < 100:
-        score += 50
+    if right_knee_angle > 100:
+        score -= abs(right_knee_angle - 90)
 
-    return score
+    return max(0, min(100, score))
 
 
 def calculate_warrior_accuracy(
@@ -21,18 +21,27 @@ def calculate_warrior_accuracy(
     right_elbow_angle
 ):
 
-    score = 0
+    score = 100
 
-    if 80 <= left_knee_angle <= 120:
-        score += 25
+    score -= abs(left_elbow_angle - 180) * 0.2
+    score -= abs(right_elbow_angle - 180) * 0.2
 
-    if right_knee_angle > 150:
-        score += 25
+    return max(0, min(100, int(score)))
 
-    if left_elbow_angle > 150:
-        score += 25
 
-    if right_elbow_angle > 150:
-        score += 25
+def calculate_chair_accuracy(
+    left_knee_angle,
+    right_knee_angle,
+    left_elbow_angle,
+    right_elbow_angle
+):
 
-    return score
+    score = 100
+
+    score -= abs(left_knee_angle - 100) * 0.3
+    score -= abs(right_knee_angle - 100) * 0.3
+
+    score -= abs(left_elbow_angle - 180) * 0.2
+    score -= abs(right_elbow_angle - 180) * 0.2
+
+    return max(0, min(100, int(score)))

@@ -8,5 +8,8 @@ def get_feedback(pose):
 
     if pose == "CHAIR POSE":
         return "Strong Legs"
+    
+    if pose == "COBRA POSE":
+       return "Excellent Stretch"
 
     return "Keep Practicing"
