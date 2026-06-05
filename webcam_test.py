@@ -19,7 +19,82 @@ from app.accuracy_engine import (
     calculate_chair_accuracy
 )
 
-st.title("🧘 AI Yoga Trainer")
+st.set_page_config(
+    page_title="AI Yoga Trainer Pro",
+    page_icon="🧘",
+    layout="wide"
+)
+st.markdown("""
+<style>
+
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #dbeafe,
+        #ede9fe
+    );
+}
+
+h1 {
+    color: #1E3A8A !important;
+    text-align: center;
+}
+
+h3 {
+    color: #111827 !important;
+    text-align: center;
+}
+
+[data-testid="stMetricValue"] {
+    color: #111827 !important;
+    font-weight: bold;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #374151 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+st.title("🧘 AI Yoga Trainer Pro")
+st.markdown(
+    "### Real-Time Yoga Pose Detection using AI & Computer Vision"
+)
+
+st.sidebar.title("🧘 Control Panel")
+
+st.sidebar.success("Camera Active")
+
+st.sidebar.markdown("""
+### Supported Poses
+
+✅ Tree Pose
+✅ Warrior Pose
+✅ Chair Pose
+✅ Cobra Pose
+""") 
+st.sidebar.markdown("---")
+
+st.sidebar.subheader("📊 Pose Counter")
+
+st.sidebar.write("Tree Pose : 0")
+st.sidebar.write("Warrior Pose : 0")
+st.sidebar.write("Chair Pose : 0")
+st.sidebar.write("Cobra Pose : 0")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Current Pose", "Waiting")
+
+with col2:
+    st.metric("Accuracy", "0%")
+
+with col3:
+    st.metric("Session Timer", "0s")
+    
+    progress_bar = st.progress(0)
 
 mp_pose = mp.solutions.pose
 mp_draw = mp.solutions.drawing_utils
